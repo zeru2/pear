@@ -1,3 +1,3 @@
 import mongoose from 'mongoose';
-mongoose.connect('mongodb://localhost/benhali');
+mongoose.connect(process.env.MONGO_CONNECT_URI);
 module.exports = mongoose
