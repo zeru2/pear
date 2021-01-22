@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-const Esatabelecimento =  require('../../../../models/Estabelecimentos')
+const Esatabelecimento =  require('../../../../models/estabelecimentosschema')
 
 export default async function register(req: any, res: NextApiResponse) :Promise<void> {
 
