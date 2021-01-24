@@ -20,6 +20,7 @@ export default async function(req, res) {
             res.end(JSON.stringify({ status: false, msg: "Chave de acesso não existe" }))
         }
     } catch(err) {
+        res.statusCode = 500;
         res.end(JSON.stringify({ status: false, msg: "Plataforma em mal funcionamento" }))
     }
 }
