@@ -1,4 +1,4 @@
-import { Esatabelecimento } from '../../register/[key]'
+const EstabelecimentoSchema = require('../../../../../models/estabelecimentosschema')
 
 export default async function Show(req, res) {
     const {
@@ -7,7 +7,7 @@ export default async function Show(req, res) {
 
     try{
         if(key === process.env.DEVELOPER_KEY) {
-            const EstabelecimentoResponse = await Esatabelecimento.find({});
+            const EstabelecimentoResponse = await EstabelecimentoSchema.find({});
             res.end(JSON.stringify({ status: true, msg: EstabelecimentoResponse }))
         } else {
             res.end(JSON.stringify({ status: false, msg: "Chave de acesso nao existe" }))
