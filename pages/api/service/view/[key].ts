@@ -1,4 +1,4 @@
-const EstabelecimentoSchema = require('../../../../../models/estabelecimentosschema')
+const EstabelecimentoSchema = require('../../../../models/estabelecimentosschema')
 import { ChaveDeAcessoErrada, PlataformaEmMalFuncionamento } from '../../../../messages/Msgs'
 
 export default async function Show(req, res) {
