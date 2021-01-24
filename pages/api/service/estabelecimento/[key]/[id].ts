@@ -13,7 +13,7 @@ export default async function(req, res) {
                 return res.end(JSON.stringify({ status: false, msg: "Estabelecimento nao existe" }))
             };
 
-            res.end(JSON.stringify({ status: false, msg: estabelecimeto }))
+            res.end(JSON.stringify({ status: true, msg: estabelecimeto }))
 
 
         } else {
