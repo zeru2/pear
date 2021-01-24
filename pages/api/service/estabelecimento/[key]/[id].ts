@@ -1,4 +1,5 @@
 const EstabelecimentoSchema = require('../../../../../models/estabelecimentosschema')
+import { IDinexistente, ChaveDeAcessoErrada, PlataformaEmMalFuncionamento } from '../../../../../messages/Msgs'
 
 export default async function(req, res) {
     const {
@@ -10,17 +11,17 @@ export default async function(req, res) {
             const estabelecimeto = await EstabelecimentoSchema.findById(id);
 
             if(!estabelecimeto) {
-                return res.end(JSON.stringify({ status: false, msg: "Estabelecimento nao existe" }))
+                return res.end(JSON.stringify({ status: false, msg: IDinexistente }))
             };
 
             res.end(JSON.stringify({ status: true, msg: estabelecimeto }))
 
 
         } else {
-            res.end(JSON.stringify({ status: false, msg: "Chave de acesso não existe" }))
+            res.end(JSON.stringify({ status: false, msg: ChaveDeAcessoErrada }))
         }
     } catch(err) {
         res.statusCode = 500;
-        res.end(JSON.stringify({ status: false, msg: "Plataforma em mal funcionamento" }))
+        res.end(JSON.stringify({ status: false, msg: PlataformaEmMalFuncionamento }))
     }
 }
