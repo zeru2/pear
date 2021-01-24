@@ -1,4 +1,4 @@
-export const Esatabelecimento =  require('../../../../../models/estabelecimentosschema')
+export const EsatabelecimentoSchema =  require('../../../../../models/estabelecimentosschema')
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function update(req: any, res: NextApiResponse) :Promise<void> {
@@ -6,25 +6,30 @@ export default async function update(req: any, res: NextApiResponse) :Promise<vo
         query: { id, key }
     } = req;
 
-    if(key === process.env.DEVELOPER_KEY) {
-        try {
-            const EstabelecimentoUpdate = await Esatabelecimento.findByIdAndUpdate(id, req.body, {
-                new: true,
-                runValidators: true
-            });
-    
-            if(!EstabelecimentoUpdate) {
-                return res.end(JSON.stringify({ status: false, msg: "Estabelecimento nao existe" }))
+    try {
+        if(key === process.env.DEVELOPER_KEY) {
+            try {
+                const EstabelecimentoUpdate = await EsatabelecimentoSchema.findByIdAndUpdate(id, req.body, {
+                    new: true,
+                    runValidators: true
+                });
+                if(!EstabelecimentoUpdate) {
+                    return res.end(JSON.stringify({ status: false, msg: "Estabelecimento nao existe" }))
+                }
+                res.end(JSON.stringify({ status: true, msg: EstabelecimentoUpdate }))
+
+            } catch(err) {
+                res.statusCode = 500;
+                res.end(JSON.stringify({ status: false, msg: "Plataforma em mal funcionamento" }))
             }
-    
-            res.end(JSON.stringify({ status: false, msg: EstabelecimentoUpdate }))
-    
-        } catch(err) {
-            res.statusCode = 500;
-            res.end(JSON.stringify({ status: false, msg: "Plataforma em mal funcionamento" }))
+        } else {
+            res.end(JSON.stringify({ status: false, msg: "Chave de acesso nao existe" }))
         }
-    } else {
-        res.end(JSON.stringify({ status: false, msg: "Chave de acesso não existe" }))
+
+
+    } catch(err) {
+        res.statusCode = 500;
+        res.end(JSON.stringify({ status: false, msg: "Plataforma em mal funcionamento" }))
     }
 
     
